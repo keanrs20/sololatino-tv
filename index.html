@@ -615,7 +615,10 @@ async function doSearch(query) {
 
 // ═══════ KEYBOARD / REMOTE CONTROL ═══════
 document.addEventListener('keydown', (e) => {
-  const key = e.key;
+  let key = e.key;
+  // Samsung TV remote: red Back button sends 'Back' (keyCode 10008), not Escape
+  if (key === 'Back' || e.keyCode === 10008) key = 'Escape';
+  else if (key === 'Return') key = 'Enter';
 
   // Direct frame mode
   if ($directFrame.style.display === 'block') {
@@ -727,7 +730,7 @@ document.querySelectorAll('.nav-btn').forEach(btn => btn.addEventListener('click
 
 // Search with debounce
 $searchInput.addEventListener('input', () => { clearTimeout(searchTimeout); searchTimeout = setTimeout(() => doSearch($searchInput.value.trim()), 700); });
-$searchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); const q = $searchInput.value.trim(); if (q.length >= 3) doSearch(q); } });
+$searchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === 'Return') { e.preventDefault(); const q = $searchInput.value.trim(); if (q.length >= 3) doSearch(q); } });
 
 // ═══════ UTILS ═══════
 function esc(str) { const d = document.createElement('div'); d.textContent = str || ''; return d.innerHTML; }

@@ -1,0 +1,24 @@
+{
+  "name": "@keanrs20/sololatino-tv",
+  "appName": "SoloLatino TV",
+  "version": "1.0.0",
+  "description": "Películas, series, animes y doramas de SoloLatino.net para Samsung Smart TV (Tizen)",
+  "packageType": "app",
+  "appPath": "index.html",
+  "keys": [
+    "MediaPlayPause",
+    "MediaPlay",
+    "MediaPause",
+    "MediaStop",
+    "MediaFastForward",
+    "MediaRewind",
+    "MediaTrackNext",
+    "MediaTrackPrevious"
+  ],
+  "author": "keanrs20",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keanrs20/sololatino-tv.git"
+  }
+}
