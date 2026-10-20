@@ -9,125 +9,102 @@
 :root{--bg:#0a0a14;--card:#12121f;--accent:#e50914;--text:#e8e8f8;--dim:#6b6b8d;--focus-ring:#ffffff;--nav-bg:rgba(10,10,20,0.97)}
 html,body{height:100%;overflow:hidden;font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text)}
 
-/* ── Top Nav Bar ── */
-#topnav{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;padding:0 32px;z-index:100;background:var(--nav-bg);border-bottom:1px solid rgba(255,255,255,0.06)}
-#topnav .logo{font-size:28px;font-weight:700;letter-spacing:2px;margin-right:40px}
+/* Top Nav */
+#topnav{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;padding:0 24px;z-index:100;background:var(--nav-bg);border-bottom:1px solid rgba(255,255,255,0.06)}
+#topnav .logo{font-size:26px;font-weight:700;letter-spacing:2px;margin-right:32px;cursor:pointer}
 #topnav .logo span:first-child{color:var(--accent)}
-.nav-btn{background:none;border:none;color:var(--dim);font-size:16px;padding:10px 20px;cursor:pointer;border-radius:8px;transition:all .15s;font-family:inherit}
+.nav-btn{background:none;border:none;color:var(--dim);font-size:15px;padding:10px 16px;cursor:pointer;border-radius:8px;transition:all .15s;font-family:inherit}
 .nav-btn:hover,.nav-btn.active{color:#fff;background:rgba(255,255,255,0.08)}
 
-/* ── Search Bar ── */
-#search-wrap{flex:1;max-width:480px;margin-left:auto;display:flex}
-#search-input{width:100%;padding:10px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.06);color:#fff;font-size:15px;outline:none;font-family:inherit}
+/* Search */
+#search-wrap{flex:1;display:flex;margin-left:auto}
+#search-input{width:100%;max-width:360px;padding:10px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.06);color:#fff;font-size:14px;outline:none;font-family:inherit}
 #search-input::placeholder{color:var(--dim)}
 
-/* ── Main Content Area ── */
+/* Search Results */
+#search-results-wrap{position:absolute;top:64px;left:24px;right:24px;z-index:50;display:none;background:#12121f;border-radius:8px;overflow:hidden}
+#search-results-wrap.show{display:block}
+.search-result-item{padding:12px 16px;cursor:pointer;display:flex;gap:12px;align-items:center;border-bottom:1px solid rgba(255,255,255,0.04)}
+.search-result-item.focused{background:rgba(229,9,20,0.15);outline:3px solid var(--focus-ring)}
+.search-result-img{width:40px;height:60px;object-fit:cover;border-radius:4px;background:#1a1a2e;flex-shrink:0}
+.search-result-info{flex:1;min-width:0}
+.search-result-title{font-size:14px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.search-result-meta{font-size:11px;color:var(--dim);margin-top:2px}
+
+/* Main */
 #main{padding-top:84px;padding-bottom:32px;height:100vh;overflow-y:auto;scroll-behavior:smooth}
 #main::-webkit-scrollbar{width:6px}
 #main::-webkit-scrollbar-thumb{background:#333;border-radius:3px}
 
-/* ── Section Header ── */
-.section-header{padding:24px 32px 12px;font-size:20px;font-weight:700;color:var(--text)}
-.section-subtitle{font-size:13px;color:var(--dim);margin-top:2px}
+/* Section Header */
+.section-header{padding:20px 24px 8px;font-size:18px;font-weight:700;color:var(--text)}
 
-/* ── Card Grid ── */
-.card-grid{display:flex;gap:24px;padding:8px 32px 32px;overflow-x:auto;scroll-behavior:smooth;min-height:0}
+/* Card Grid - horizontal scroll */
+.card-grid{display:flex;gap:16px;padding:8px 24px 24px;overflow-x:auto;scroll-behavior:smooth}
 .card-grid::-webkit-scrollbar{height:6px}
 .card-grid::-webkit-scrollbar-thumb{background:#333;border-radius:3px}
 
-/* ── Cards ── */
-.card{flex-shrink:0;width:170px;cursor:pointer;border-radius:8px;background:var(--card);transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden}
-.card:hover,.card.focused{transform:scale(1.05)}
+/* Cards */
+.card{flex-shrink:0;width:150px;cursor:pointer;border-radius:8px;background:var(--card);transition:transform .2s;z-index:1;overflow:hidden}
 .card.focused{outline:3px solid var(--focus-ring);outline-offset:-3px;z-index:10}
 .card-img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;background:#1a1a2e}
-.card-info{padding:8px 10px}
-.card-title{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3}
-.card-year{font-size:11px;color:var(--dim);margin-top:2px}
+.card-info{padding:6px 8px}
+.card-title{font-size:12px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3}
+.card-year{font-size:10px;color:var(--dim);margin-top:1px}
 
-/* ── Wide Cards (for featured) ── */
-.wide-card{flex-shrink:0;width:75%;max-width:800px;cursor:pointer;border-radius:12px;background:var(--card);transition:transform .2s,box-shadow .2s;overflow:hidden;margin:0 32px}
-.wide-card:hover,.wide-card.focused{transform:scale(1.02)}
-.wide-card.focused{outline:3px solid var(--focus-ring);outline-offset:-3px;z-index:10}
-.wide-img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#1a1a2e}
-.wide-info{padding:16px 20px}
-.wide-title{font-size:24px;font-weight:700;color:var(--text)}
+/* Pagination */
+.pagination{text-align:center;padding:20px 24px;display:flex;justify-content:center;gap:6px}
+.page-btn{padding:8px 16px;background:rgba(255,255,255,0.06);border:none;border-radius:6px;color:var(--text);font-size:13px;cursor:pointer;font-family:inherit}
+.page-btn.focused{background:rgba(229,9,20,0.3)}
 
-/* ── Video Player Overlay ── */
+/* Player Overlay */
 #player-overlay{position:fixed;inset:0;background:#000;z-index:200;display:none;flex-direction:column}
 #player-overlay.show{display:flex}
-#player-bar{height:56px;display:flex;align-items:center;padding:0 24px;background:rgba(0,0,0,0.9);gap:16px}
-#player-back{background:none;border:none;color:#fff;font-size:18px;cursor:pointer;padding:8px 16px;border-radius:6px;display:flex;align-items:center;gap:8px;font-family:inherit}
-#player-title{font-size:16px;font-weight:600;color:var(--text);flex:1}
-#player-close{background:none;border:none;color:#fff;font-size:24px;cursor:pointer;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%}
-#iframe-container{flex:1;display:flex;flex-direction:column;padding:8px 8px 8px;overflow:hidden}
-#player-iframe{width:100%;height:calc(100vh - 72px);border:none;background:#000;border-radius:8px}
+#player-bar{height:52px;display:flex;align-items:center;padding:0 16px;gap:12px}
+#player-back{background:none;border:none;color:#fff;font-size:16px;cursor:pointer;padding:8px 14px;border-radius:6px;display:flex;align-items:center;gap:6px;font-family:inherit}
+#player-title{font-size:15px;font-weight:600;color:var(--text);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#player-close{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+#iframe-container{flex:1;padding:4px 4px 4px;overflow:hidden}
+#player-iframe{width:100%;height:calc(100vh - 60px);border:none;background:#000}
 
-/* ── Server Selector Modal ── */
-#server-modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:300;display:none;align-items:center;justify-content:center}
+/* Server Modal */
+#server-modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:300;display:none;align-items:center;justify-content:center;padding:24px}
 #server-modal.show{display:flex}
-.modal-box{background:#16162a;border-radius:12px;padding:32px;max-width:600px;width:90%;max-height:80vh;overflow-y:auto}
-.modal-title{font-size:22px;font-weight:700;margin-bottom:4px}
-.modal-subtitle{font-size:13px;color:var(--dim);margin-bottom:24px}
-.server-btn{display:block;width:100%;padding:16px 20px;background:rgba(255,255,255,0.06);border:2px solid transparent;border-radius:8px;color:var(--text);font-size:16px;text-align:left;cursor:pointer;margin-bottom:8px;font-family:inherit;transition:all .15s}
-.server-btn:hover,.server-btn.focused{background:rgba(229,9,20,0.15);border-color:var(--accent)}
+.modal-box{background:#16162a;border-radius:12px;padding:24px;max-width:500px;width:100%;max-height:80vh;overflow-y:auto}
+.modal-title{font-size:20px;font-weight:700;margin-bottom:4px}
+.modal-subtitle{font-size:12px;color:var(--dim);margin-bottom:16px}
+.server-btn{display:block;width:100%;padding:14px 16px;background:rgba(255,255,255,0.06);border:2px solid transparent;border-radius:8px;color:var(--text);font-size:15px;text-align:left;cursor:pointer;margin-bottom:6px;font-family:inherit}
+.server-btn.focused{background:rgba(229,9,20,0.15)}
 
-/* ── Loading Spinner ── */
-#loading{text-align:center;padding:80px 32px;display:none}
-.spinner{width:48px;height:48px;border:4px solid rgba(255,255,255,0.1);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 16px}
+/* Loading */
+#loading{text-align:center;padding:80px 24px;display:none}
+.spinner{width:44px;height:44px;border:3px solid rgba(255,255,255,0.1);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 12px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ── Pagination ── */
-.pagination{text-align:center;padding:24px 32px;display:flex;justify-content:center;align-items:center;gap:8px}
-.page-btn{padding:10px 18px;background:rgba(255,255,255,0.06);border:none;border-radius:6px;color:var(--text);font-size:14px;cursor:pointer;font-family:inherit;transition:all .15s}
-.page-btn:hover,.page-btn.focused{background:rgba(229,9,20,0.3)}
-.page-btn.disabled{opacity:.3;pointer-events:none}
+/* Error */
+.state-msg{text-align:center;padding:80px 24px;color:var(--dim);font-size:15px}
 
-/* ── Empty / Error States ── */
-.state-msg{text-align:center;padding:80px 32px;color:var(--dim);font-size:16px}
-.state-msg .icon{font-size:48px;margin-bottom:16px}
-
-/* ── Category Chips Row ── */
-.cat-row{display:flex;gap:12px;padding:8px 32px 0;overflow-x:auto}
-.cat-chip{flex-shrink:0;padding:8px 20px;border-radius:24px;background:rgba(255,255,255,0.06);border:none;color:var(--dim);font-size:14px;cursor:pointer;font-family:inherit;transition:all .15s}
-.cat-chip:hover,.cat-chip.active{background:var(--accent);color:#fff}
-
-/* ── Series/Anime detail panel ── */
-.season-row{display:flex;gap:8px;padding:4px 32px 0;overflow-x:auto;margin-bottom:16px}
-.season-btn{flex-shrink:0;padding:10px 20px;background:rgba(255,255,255,0.06);border:none;border-radius:8px;color:var(--text);font-size:14px;cursor:pointer;font-family:inherit}
+/* Series Detail */
+.season-row{display:flex;gap:8px;padding:4px 24px 0;overflow-x:auto;margin-bottom:12px}
+.season-btn{flex-shrink:0;padding:8px 16px;background:rgba(255,255,255,0.06);border:none;border-radius:6px;color:var(--text);font-size:13px;cursor:pointer;font-family:inherit}
 .season-btn.active{background:var(--accent)}
 
-.episode-grid{display:flex;gap:20px;padding:8px 32px 32px;overflow-x:auto;flex-wrap:nowrap}
-.episode-card{flex-shrink:0;width:340px;border-radius:8px;background:var(--card);cursor:pointer;transition:all .15s;overflow:hidden}
-.episode-card:hover,.episode-card.focused{transform:scale(1.02)}
+.episode-grid{display:flex;gap:16px;padding:8px 24px 24px;overflow-x:auto;flex-wrap:nowrap}
+.episode-card{flex-shrink:0;width:300px;border-radius:8px;background:var(--card);cursor:pointer;overflow:hidden}
 .episode-card.focused{outline:3px solid var(--focus-ring);outline-offset:-3px;z-index:10}
 .ep-thumb{width:100%;aspect-ratio:16/9;object-fit:cover;background:#1a1a2e;display:block}
-.ep-info{padding:8px 12px}
-.ep-title{font-size:14px;font-weight:600;color:var(--text)}
-.ep-desc{font-size:12px;color:var(--dim);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ep-info{padding:8px 10px}
+.ep-title{font-size:13px;font-weight:600;color:var(--text)}
+.ep-desc{font-size:11px;color:var(--dim);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-/* ── Backdrop for series ── */
-.backdrop-section{position:relative;margin-bottom:0}
-.backdrop-img{width:100%;height:320px;object-fit:cover;display:block;background:#1a1a2e;border-radius:0 0 16px 16px}
-
-/* ── Search Results dropdown ── */
-#search-results-wrap{position:absolute;top:56px;left:32px;right:32px;z-index:50;display:none}
-#search-results-wrap.show{display:block}
-.search-result-item{padding:14px 16px;background:var(--card);border-bottom:1px solid rgba(255,255,255,0.06);cursor:pointer;display:flex;gap:12px;align-items:center}
-.search-result-item.focused{background:rgba(229,9,20,0.15)}
-.search-result-img{width:48px;height:72px;object-fit:cover;border-radius:4px;background:#1a1a2e;flex-shrink:0}
-.search-result-info{flex:1}
-.search-result-title{font-size:15px;font-weight:600;color:var(--text)}
-.search-result-meta{font-size:12px;color:var(--dim);margin-top:2px}
-
-/* ── Footer spacing ── */
-.spacer{height:48px}
+/* Direct iframe mode */
+#direct-frame{position:fixed;top:64px;left:0;right:0;bottom:0;border:none;z-index:50;display:none;background:#0a0a14}
 </style>
 </head>
 <body>
 
-<!-- Top Navigation -->
 <nav id="topnav">
-  <div class="logo"><span>SOLO</span>LATINO<span>.</span></div>
+  <div class="logo" tabindex="-1"><span>SOLO</span>LATINO<span>.</span></div>
   <button class="nav-btn active" data-cat="movies" tabindex="-1">Películas</button>
   <button class="nav-btn" data-cat="series" tabindex="-1">Series</button>
   <button class="nav-btn" data-cat="anime" tabindex="-1">Anime</button>
@@ -137,19 +114,15 @@ html,body{height:100%;overflow:hidden;font-family:'Segoe UI',system-ui,sans-seri
   </div>
 </nav>
 
-<!-- Search Results -->
 <div id="search-results-wrap"></div>
 
-<!-- Main Content -->
 <main id="main">
-  <!-- Loading -->
   <div id="loading"><div class="spinner"></div><p>Cargando...</p></div>
-  
-  <!-- Dynamic content renders here -->
   <div id="content-area"></div>
 </main>
 
-<!-- Video Player Overlay -->
+<iframe id="direct-frame" allowfullscreen allow="autoplay; encrypted-media; fullscreen"></iframe>
+
 <div id="player-overlay">
   <div id="player-bar">
     <button id="player-back" tabindex="-1">&#8592; Volver</button>
@@ -161,7 +134,6 @@ html,body{height:100%;overflow:hidden;font-family:'Segoe UI',system-ui,sans-seri
   </div>
 </div>
 
-<!-- Server Selector Modal -->
 <div id="server-modal">
   <div class="modal-box">
     <div class="modal-title">Servidores disponibles</div>
@@ -171,130 +143,130 @@ html,body{height:100%;overflow:hidden;font-family:'Segoe UI',system-ui,sans-seri
 </div>
 
 <script>
-// ═══════════════════════════════════════════
-// Configuration
-// ═══════════════════════════════════════════
+// ═══════════════════════════════ CONFIG ═══════════════════════════════
 const BASE = 'https://sololatino.net';
-const CORS_PROXIES = [
-  url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-  url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-  url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
-];
 
-// ═══════════════════════════════════════════
-// State
-// ═══════════════════════════════════════════
+// ═══════════════════════════════ STATE ═══════════════════════════════
 let currentCat = 'movies';
 let currentPage = 1;
 let focusedIndex = 0;
-let allItems = []; // items in the current view
-let focusableEls = []; // DOM elements that can receive focus
+let focusableEls = [];
 let searchResults = [];
-let currentSearchQuery = '';
+let currentDetailData = null;
 
-// ═══════════════════════════════════════════
 // DOM refs
-// ═══════════════════════════════════════════
 const $main = document.getElementById('main');
 const $content = document.getElementById('content-area');
 const $loading = document.getElementById('loading');
 const $searchInput = document.getElementById('search-input');
-const $searchResultsWrap = document.getElementById('search-results-wrap');
+const $searchWrap = document.getElementById('search-results-wrap');
 const $playerOverlay = document.getElementById('player-overlay');
 const $playerIframe = document.getElementById('player-iframe');
-const $playerTitle = document.getElementById('player-title');
+const $playerTitleEl = document.getElementById('player-title');
 const $serverModal = document.getElementById('server-modal');
-const $serverList = document.getElementById('server-list');
+const $serverListEl = document.getElementById('server-list');
 const $serverModalTitle = document.getElementById('server-modal-title');
+const $directFrame = document.getElementById('direct-frame');
 
-// ═══════════════════════════════════════════
-// CORS Proxy - try multiple proxies until one works
-// ═══════════════════════════════════════════
-async function fetchWithProxy(url) {
-  for (const proxyFn of CORS_PROXIES) {
+// ═══════════════════════════════ FETCH (DIRECT - no proxy) ═══════════════════════════════
+async function fetchPage(path, retries = 2) {
+  for (let attempt = 0; attempt <= retries; attempt++) {
     try {
-      const proxyUrl = proxyFn(url);
-      console.log('Trying:', proxyUrl.substring(0,80));
-      const res = await fetch(proxyUrl, { signal: AbortSignal.timeout(15000) });
+      const url = BASE + path;
+      console.log('Fetching:', url);
+      
+      // Add cache-busting to avoid stale content
+      const cacheUrl = url + (url.includes('?') ? '&' : '?') + '_=' + Date.now();
+      
+      const res = await fetch(cacheUrl, {
+        headers: {
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+          'Accept-Language': 'es-419,es;q=0.9,en;q=0.8'
+        }
+      });
+      
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return await res.text();
-    } catch(e) {
-      console.warn('Proxy failed:', e.message);
+    } catch (e) {
+      console.warn('Attempt', attempt + 1, 'failed:', e.message);
+      if (attempt < retries) await sleep(1500 * (attempt + 1));
     }
   }
-  throw new Error('All proxies failed');
+  throw new Error('No se pudo cargar el contenido');
 }
 
-// ═══════════════════════════════════════════
-// HTML Parser helpers
-// ═══════════════════════════════════════════
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ═══════════════════════════════ PARSER ═══════════════════════════════
 function parseHTML(html) {
   const parser = new DOMParser();
   return parser.parseFromString(html, 'text/html');
 }
 
-function extractItemsFromPage(doc, type) {
+function extractItems(doc, type) {
   const items = [];
+  const prefix = type === 'movies' ? '/pelicula/' : '/serie/';
   
-  // Try to find card elements - sololatino uses various selectors
-  let cards;
-  if (type === 'movies') {
-    cards = doc.querySelectorAll('.col-item, .item-card, [class*="card"], .movie-item, a[href^="/pelicula/"]');
-  } else if (type === 'series' || type === 'doramas') {
-    cards = doc.querySelectorAll('a[href^="/serie/"]');
-  } else if (type === 'anime') {
-    cards = doc.querySelectorAll('a[href^="/serie/"], a[href*="anime"]');
-  }
-  
-  // Fallback: find all links matching the pattern
-  if (!cards || cards.length === 0) {
-    const allLinks = doc.querySelectorAll('a[href]');
-    const prefix = type === 'movies' ? '/pelicula/' : '/serie/';
-    cards = Array.from(allLinks).filter(a => a.href.includes(prefix));
-  }
+  // Get all links matching the pattern
+  const allLinks = doc.querySelectorAll('a[href]');
+  const matchingLinks = Array.from(allLinks).filter(a => {
+    const h = (a.getAttribute('href') || '').toLowerCase();
+    if (type === 'movies') return h.startsWith('/pelicula/');
+    if (type === 'series' || type === 'doramas') return h.startsWith('/serie/');
+    if (type === 'anime') return h.includes('/serie/') && (h.includes('anime') || h.includes('/animes'));
+    return false;
+  });
 
-  for (const card of cards) {
-    const href = card.href;
-    if (!href || !href.startsWith(BASE)) continue;
+  for (const link of matchingLinks) {
+    const href = link.getAttribute('href');
+    if (!href) continue;
     
-    // Extract title from alt text, title attribute, or inner text
+    // Get title from alt text or nearest heading/link text
     let title = '';
-    const img = card.querySelector('img');
-    if (img && img.alt) title = img.alt;
-    else {
-      const t = card.querySelector('.card-title, .title, h3, h4, [class*="title"], [class*="name"]');
-      if (t) title = t.textContent.trim();
-    }
+    const parentCard = link.closest('[class*="card"], [class*="item"]') || link.parentElement?.parentElement?.parentElement;
+    const imgEl = link.querySelector('img');
     
-    // Extract year
-    let year = '';
-    const y = card.querySelector('[class*="year"], [class*="date"], .meta-info');
-    if (y) {
-      const m = y.textContent.match(/(\d{4})/);
-      if (m) year = m[1];
-    }
-    
-    // Extract poster image
-    let poster = '';
-    if (img && img.src) {
-      // Convert to w500 size for better quality
-      poster = img.src.replace(/\/w\d+\/?/, '/w500');
+    if (imgEl && imgEl.alt) {
+      title = imgEl.alt.trim();
     } else {
-      const anyImg = card.querySelector('img');
+      // Try to get text from sibling elements or parent structure
+      const siblings = Array.from(link.parentElement.children);
+      for (const sib of siblings) {
+        const t = sib.querySelector('[class*="title"], h3, h4, span');
+        if (t && t.textContent.trim()) { title = t.textContent.trim(); break; }
+      }
+      // Fallback: get all text from the link and its children
+      if (!title) {
+        const fullText = link.textContent.trim().replace(/\s+/g, ' ');
+        if (fullText.length > 2 && fullText.length < 100) title = fullText;
+      }
+    }
+
+    // Extract year from anywhere in the vicinity
+    let year = '';
+    const textContext = link.textContent + ' ' + (imgEl ? imgEl.alt : '');
+    const yearMatch = textContext.match(/\b(20\d{2}|19\d{2})\b/);
+    if (yearMatch) year = yearMatch[1];
+
+    // Get poster image - look for TMDB images
+    let poster = '';
+    if (imgEl && imgEl.src) {
+      poster = imgEl.src.replace(/\/w\d+\/?/, '/w500');
+    } else {
+      const anyImg = link.querySelector('img');
       if (anyImg && anyImg.src) poster = anyImg.src;
     }
 
-    // Clean title - remove "Película" or type prefix
+    // Clean title
     title = title.replace(/^(Pelicula|Serie|Anime|Dorama)\s*[-–—]?\s*/i, '').trim();
-    
-    if (title && href) {
+
+    if (title && href.startsWith('/')) {
       items.push({
-        id: parseSlug(href),
-        slug: parseSlug(href),
-        url: href.startsWith('http') ? href : BASE + href,
+        slug: href.replace(/^\//, ''),
+        url: BASE + href,
         title,
         year: year || '?',
-        poster: poster || '',
+        poster,
         type
       });
     }
@@ -309,316 +281,123 @@ function extractItemsFromPage(doc, type) {
   });
 }
 
-function parseSlug(url) {
-  try {
-    const u = new URL(url.startsWith('http') ? url : BASE + url);
-    return u.pathname.replace(/^\//, '').replace(/\/$/, '');
-  } catch { return ''; }
-}
-
-// ═══════════════════════════════════════════
-// Fetch category page
-// ═══════════════════════════════════════════
-async function fetchCategory(cat, page = 1) {
-  showLoading(true);
-  
-  let url;
-  if (cat === 'movies') url = `${BASE}/peliculas?page=${page}`;
-  else if (cat === 'series') url = `${BASE}/series?page=${page}`;
-  else if (cat === 'anime') url = `${BASE}/animes?page=${page}`;
-  else if (cat === 'doramas') url = `${BASE}/doramas?page=${page}`;
-  
-  try {
-    const html = await fetchWithProxy(url);
-    const doc = parseHTML(html);
-    const items = extractItemsFromPage(doc, cat);
-    
-    showLoading(false);
-    return { items, page, total: items.length };
-  } catch (e) {
-    console.error('Fetch error:', e);
-    showError(e.message);
-    return { items: [], page, error: true };
-  }
-}
-
-// ═══════════════════════════════════════════
-// Fetch movie/series detail page for video links
-// ═══════════════════════════════════════════
-async function fetchDetailPage(slug) {
-  const url = `${BASE}/${slug}`;
-  try {
-    const html = await fetchWithProxy(url);
-    return parsePlayerLinks(html, slug);
-  } catch (e) {
-    console.error('Detail fetch error:', e);
-    return null;
-  }
-}
-
-function parsePlayerLinks(html, slug) {
+// ═══════════════════════════════ PLAYER LINKS PARSER ═══════════════════════════════
+function extractPlayerLinks(html) {
   const doc = parseHTML(html);
   const servers = [];
-  
-  // Look for iframes or embed links in the page
-  const iframes = doc.querySelectorAll('iframe[src]');
-  for (const iframe of iframes) {
+
+  // Look for iframe src attributes (video embeds)
+  doc.querySelectorAll('iframe[src]').forEach(iframe => {
     const src = iframe.getAttribute('src');
     if (src && !servers.find(s => s.url === src)) {
-      servers.push({ name: 'Servidor', url: src.startsWith('http') ? src : BASE + src });
+      let name = 'Servidor';
+      try { name = new URL(src).hostname.replace('www.', ''); } catch {}
+      servers.push({ name, url: src });
     }
-  }
+  });
 
-  // Look for links to video hosts (embed69, xupalace, etc.)
-  const allLinks = doc.querySelectorAll('a[href]');
-  const hostPatterns = ['embed69', 'xupalace', 'streamtape', 'dood', 'filemoon', 'mega', 'okru'];
-  
-  for (const link of allLinks) {
+  // Look for links to known video hosts
+  const hostPatterns = ['embed69', 'xupalace', 'streamtape', 'dood', 'filemoon', 'megacloud', 'okru'];
+  doc.querySelectorAll('a[href]').forEach(link => {
     const href = link.getAttribute('href') || '';
-    const text = link.textContent.trim();
+    const text = (link.textContent || '').trim();
     
-    if (hostPatterns.some(p => href.includes(p)) && !servers.find(s => s.url === href)) {
-      servers.push({ 
-        name: text || pHostName(href), 
-        url: href.startsWith('http') ? href : BASE + href 
-      });
+    if (hostPatterns.some(p => href.toLowerCase().includes(p))) {
+      let name = text || 'Servidor';
+      try { name = new URL(href).hostname.replace('www.', ''); } catch {}
+      servers.push({ name, url: href });
     }
+  });
+
+  // Look for data-src or data-url attributes
+  doc.querySelectorAll('[data-src]').forEach(el => {
+    const src = el.getAttribute('data-src');
+    if (src && !servers.find(s => s.url === src)) servers.push({ name: 'Servidor', url: src });
+  });
+
+  // Fallback: use the page itself as embed
+  if (!servers.length) {
+    servers.push({ name: 'Reproductor Principal', url: BASE + window.location.pathname.substring(1) });
   }
 
-  // Also look for data attributes that might contain URLs
-  const allEls = doc.querySelectorAll('[data-url], [data-src], [data-link]');
-  for (const el of allEls) {
-    const urlAttr = el.getAttribute('data-url') || el.getAttribute('data-src') || el.getAttribute('data-link');
-    if (urlAttr && !servers.find(s => s.url === urlAttr)) {
-      servers.push({ name: 'Servidor', url: urlAttr });
-    }
-  }
-
-  // If no specific server links found, try to find the main embed iframe URL pattern
-  if (servers.length === 0) {
-    // Try common embed patterns based on slug
-    const parts = slug.split('/');
-    const titleSlug = parts[1] || '';
-    
-    // Search for any src attribute containing video URLs in script tags
-    const scripts = doc.querySelectorAll('script[type="application/ld+json"]');
-    for (const script of scripts) {
-      try {
-        const data = JSON.parse(script.textContent);
-        if (data.watchAction) {
-          servers.push({ name: 'Embed Principal', url: BASE + '/' + slug });
-        }
-      } catch {}
-    }
-    
-    // Generic: use the page itself as embed source
-    if (servers.length === 0) {
-      servers.push({ 
-        name: 'Reproductor Principal', 
-        url: `${BASE}/${slug}` 
-      });
-    }
-  }
-
-  return { title: slug.split('/').pop().replace(/-/g, ' '), servers };
+  return servers;
 }
 
-function pHostName(url) {
-  try {
-    const u = new URL(url);
-    return u.hostname.replace('www.', '').replace('.org', '').replace('.com', '');
-  } catch { return 'Servidor'; }
-}
+// ═══════════════════════════════ RENDERING ═══════════════════════════════
+function showLoading(v) { $loading.style.display = v ? 'block' : 'none'; }
 
-// ═══════════════════════════════════════════
-// Search
-// ═══════════════════════════════════════════
-let searchTimeout;
-async function doSearch(query) {
-  if (!query || query.length < 3) {
-    $searchResultsWrap.classList.remove('show');
+function renderCards(items, catLabel) {
+  if (!items.length) {
+    $content.innerHTML = '<div class="state-msg"><div style="font-size:40px;margin-bottom:12px">🎬</div>No se encontraron resultados</div>';
     return;
   }
 
-  currentSearchQuery = query;
-  
-  try {
-    const url = `${BASE}/buscar?q=${encodeURIComponent(query)}`;
-    const html = await fetchWithProxy(url);
-    const doc = parseHTML(html);
+  let html = `<div class="section-header">${catLabel}</div>`;
+  html += '<div class="card-grid" id="grid-main">';
+  items.forEach(item => {
+    const posterSrc = item.poster || '';
+    html += `
+      <div class="card" data-url="${item.url}" tabindex="-1">
+        ${posterSrc ? `<img class="card-img" src="${posterSrc}" alt="" loading="lazy" onerror="this.style.display='none'">` : '<div class="card-img" style="display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:10px">Sin imagen</div>'}
+        <div class="card-info">
+          <div class="card-title">${esc(item.title)}</div>
+          ${item.year && item.year !== '?' ? `<div class="card-year">${item.year}</div>` : ''}
+        </div>
+      </div>`;
+  });
+  html += '</div>';
+
+  // Pagination
+  if (currentPage > 1 || true) { // Always show pagination for navigation
+    html += '<div class="pagination" id="pag-area">';
     
-    // Search results have similar card structure
-    searchResults = [];
-    const cards = Array.from(doc.querySelectorAll('a[href]')).filter(a => {
-      const h = a.getAttribute('href') || '';
-      return h.startsWith('/pelicula/') || h.startsWith('/serie/');
-    });
-
-    for (const card of cards.slice(0, 30)) { // limit results
-      const href = card.getAttribute('href');
-      if (!href) continue;
-      
-      let title = '';
-      const img = card.querySelector('img');
-      if (img && img.alt) title = img.alt;
-      else {
-        const t = card.querySelector('.card-title, .title, h3, [class*="name"]');
-        if (t) title = t.textContent.trim();
-      }
-
-      let poster = '';
-      if (img && img.src) poster = img.src.replace(/\/w\d+\/?/, '/w500');
-
-      if (title) {
-        searchResults.push({
-          slug: parseSlug(BASE + href),
-          url: BASE + href,
-          title,
-          year: '?',
-          poster,
-          type: href.startsWith('/serie/') ? 'series' : 'movies'
-        });
-      }
+    if (currentPage > 1) {
+      html += `<button class="page-btn" data-page="${currentPage - 1}" tabindex="-1">&#8592; Anterior</button>`;
     }
-
-    renderSearchResults();
-  } catch (e) {
-    console.error('Search error:', e);
+    
+    const start = Math.max(1, currentPage - 2);
+    const end = Math.min(currentPage + 3, currentPage + 4); // show ~5 pages max
+    for (let i = start; i <= end; i++) {
+      html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}" tabindex="-1">${i}</button>`;
+    }
+    
+    html += `<button class="page-btn" data-page="${currentPage + 1}" tabindex="-1">Siguiente &#8594;</button>`;
+    html += '</div>';
   }
+
+  $content.innerHTML = html;
+  buildFocusable();
 }
 
 function renderSearchResults() {
   if (!searchResults.length) {
-    $searchResultsWrap.classList.remove('show');
+    $searchWrap.classList.remove('show');
     return;
   }
 
-  $searchResultsWrap.innerHTML = searchResults.map((r, i) => `
+  $searchWrap.innerHTML = searchResults.map((r, i) => `
     <div class="search-result-item" data-index="${i}" tabindex="-1">
-      <img class="search-result-img" src="${r.poster || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}" alt="" loading="lazy" onerror="this.style.display='none'">
+      ${r.poster ? `<img class="search-result-img" src="${r.poster}" alt="" loading="lazy">` : '<div class="search-result-img"></div>'}
       <div class="search-result-info">
-        <div class="search-result-title">${escapeHtml(r.title)}</div>
-        <div class="search-result-meta">${r.type === 'series' ? 'Serie' : 'Película'} · ${r.year}</div>
+        <div class="search-result-title">${esc(r.title)}</div>
+        <div class="search-result-meta">${r.type === 'series' ? 'Serie' : 'Pelicula'} · ${r.year}</div>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 
-  $searchResultsWrap.classList.add('show');
+  $searchWrap.classList.add('show');
 }
 
-// ═══════════════════════════════════════════
-// Rendering
-// ═══════════════════════════════════════════
-function renderCategory(items, cat) {
-  if (!items.length) {
-    $content.innerHTML = `<div class="state-msg"><div class="icon">🎬</div>No se encontraron resultados</div>`;
-    return;
-  }
-
-  const catLabels = { movies: 'Películas', series: 'Series', anime: 'Anime', doramas: 'Doramas' };
+// ═══════════════════════════════ FOCUS MANAGEMENT ═══════════════════════════════
+function buildFocusable() {
+  focusableEls = [];
   
-  // Render as a scrollable horizontal row with pagination below
-  let html = `
-    <div class="section-header">${catLabels[cat]}</div>
-    <div class="card-grid" id="grid-${cat}">
-      ${items.map((item, i) => renderCard(item)).join('')}
-    </div>
-  `;
-
-  // Add pagination if we have it
-  html += `<div class="pagination" id="pag-area"></div>`;
+  // Nav buttons first
+  document.querySelectorAll('#topnav .nav-btn').forEach(btn => focusableEls.push(btn));
   
-  $content.innerHTML = html;
-  
-  // Build focusable elements list for this view
-  buildFocusableElements();
-}
+  // Content elements
+  const contentElms = Array.from($content.querySelectorAll('.card, .episode-card, .server-btn, .season-btn, .page-btn'));
+  focusableEls.push(...contentElms);
 
-function renderCard(item) {
-  const posterSrc = item.poster || `data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7`;
-  return `
-    <div class="card" data-id="${item.id}" data-url="${item.url}" tabindex="-1">
-      <img class="card-img" src="${posterSrc}" alt="${escapeHtml(item.title)}" loading="lazy" 
-           onerror="this.style.display='none'">
-      <div class="card-info">
-        <div class="card-title">${escapeHtml(item.title)}</div>
-        ${item.year && item.year !== '?' ? `<div class="card-year">${item.year}</div>` : ''}
-      </div>
-    </div>
-  `;
-}
-
-function renderDetail(detail) {
-  if (!detail) return showError('No se pudo cargar el contenido');
-  
-  const isMovie = detail.slug.startsWith('pelicula/');
-  const catLabels = { movies: 'Película', series: 'Serie' };
-
-  // For movies, show server selection directly
-  if (isMovie || !detail.seasons) {
-    renderServerModal(detail.title || parseSlug(detail.url).split('/').pop(), detail.servers);
-    return;
-  }
-
-  // Show seasons/episodes for series
-  let html = `
-    <div class="section-header">${escapeHtml(detail.title)}</div>
-  `;
-
-  if (detail.seasons) {
-    html += `<div class="season-row" id="seasons-row">`;
-    detail.seasons.forEach((s, i) => {
-      html += `<button class="season-btn ${i === 0 ? 'active' : ''}" data-season="${i}">${s}</button>`;
-    });
-    html += `</div>`;
-
-    // Episodes for first season by default
-    if (detail.seasonEpisodes && detail.seasonEpisodes[0]) {
-      const episodes = detail.seasonEpisodes[0];
-      html += `<div class="episode-grid" id="episodes-grid">`;
-      episodes.forEach((ep, i) => {
-        html += `
-          <div class="episode-card" data-episode="${i}" tabindex="-1">
-            ${ep.thumbnail ? `<img class="ep-thumb" src="${ep.thumbnail}" alt="" loading="lazy">` : ''}
-            <div class="ep-info">
-              <div class="ep-title">${escapeHtml(ep.title)}</div>
-              <div class="ep-desc">${escapeHtml(ep.description || '')}</div>
-            </div>
-          </div>`;
-      });
-      html += `</div>`;
-    }
-  }
-
-  // Server buttons at bottom
-  if (detail.servers && detail.servers.length) {
-    html += `<div style="padding:16px 32px"><button class="server-btn" id="play-movie-btn">▶ Reproducir ${isMovie ? 'Película' : 'Serie'}</button></div>`;
-  }
-
-  $content.innerHTML = html;
-}
-
-function renderServerModal(title, servers) {
-  if (!servers || !servers.length) return showError('No se encontraron servidores');
-  
-  $serverModalTitle.textContent = title;
-  $serverList.innerHTML = servers.map((s, i) => `
-    <button class="server-btn" data-server="${i}">${escapeHtml(s.name)}</button>
-  `).join('');
-  
-  $serverModal.classList.add('show');
-}
-
-// ═══════════════════════════════════════════
-// Focus Management (Remote Control Navigation)
-// ═══════════════════════════════════════════
-function buildFocusableElements() {
-  focusableEls = Array.from($content.querySelectorAll('.card, .episode-card, .search-result-item, .server-btn, .season-btn, .page-btn'));
-  
-  // Also include nav buttons and search input
-  const topNavBtns = document.querySelectorAll('#topnav .nav-btn');
-  focusableEls.unshift(...topNavBtns);
-  
   focusedIndex = Math.min(focusedIndex, focusableEls.length - 1);
   if (focusedIndex < 0) focusedIndex = 0;
   
@@ -626,25 +405,24 @@ function buildFocusableElements() {
 }
 
 function applyFocus() {
-  // Clear all previous focus highlights
   document.querySelectorAll('.focused').forEach(el => el.classList.remove('focused'));
   
-  if (focusableEls.length && focusableEls[focusedIndex]) {
-    const el = focusableEls[focusedIndex];
-    el.classList.add('focused');
-    
-    // Scroll into view for cards
-    if (el.classList.contains('card') || el.classList.contains('episode-card')) {
-      const parent = el.parentElement;
-      if (parent) {
-        const scrollLeft = el.offsetLeft - parent.offsetWidth / 2 + el.offsetWidth / 2;
-        parent.scrollTo({ left: Math.max(0, scrollLeft), behavior: 'smooth' });
-      }
+  if (!focusableEls[focusedIndex]) return;
+  
+  const el = focusableEls[focusedIndex];
+  el.classList.add('focused');
+  
+  // Auto-scroll cards into view
+  if (el.classList.contains('card') || el.classList.contains('episode-card')) {
+    const parent = el.parentElement;
+    if (parent) {
+      const offset = el.offsetLeft - parent.offsetWidth / 2 + el.offsetWidth / 2;
+      parent.scrollTo({ left: Math.max(0, offset), behavior: 'smooth' });
     }
-    
-    // Scroll element into main view
-    $main.scrollTop = el.offsetTop - 100;
   }
+  
+  // Scroll element into main view
+  $main.scrollTop = Math.max(0, el.offsetTop - 120);
 }
 
 function focusNext() {
@@ -659,248 +437,224 @@ function focusPrev() {
   applyFocus();
 }
 
-// ═══════════════════════════════════════════
-// Event Handlers
-// ═══════════════════════════════════════════
-
-// Nav category buttons
-document.querySelectorAll('.nav-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const cat = btn.dataset.cat;
-    navigateToCategory(cat);
-  });
-});
-
-function navigateToCategory(cat) {
+// ═══════════════════════════════ NAVIGATION / ACTIONS ═══════════════════════════════
+async function loadCategory(cat, page) {
   currentCat = cat;
-  currentPage = 1;
+  currentPage = page || 1;
   
-  // Update active nav button
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   const activeBtn = document.querySelector(`.nav-btn[data-cat="${cat}"]`);
   if (activeBtn) activeBtn.classList.add('active');
 
-  loadCategory(cat, currentPage);
+  // Close search
+  $searchWrap.classList.remove('show');
   
-  // Close search results
-  $searchResultsWrap.classList.remove('show');
-  focusedIndex = focusableEls.length > 0 ? Math.min(focusedIndex, focusableEls.length - 1) : 0;
-}
-
-async function loadCategory(cat, page) {
   showLoading(true);
   
-  const result = await fetchCategory(cat, page);
-  
-  if (result.items && result.items.length > 0) {
-    allItems = result.items;
-    renderCategory(allItems, cat);
+  try {
+    let path;
+    switch(cat) {
+      case 'movies': path = `/peliculas?page=${currentPage}`; break;
+      case 'series': path = `/series?page=${currentPage}`; break;
+      case 'anime': path = `/animes?page=${currentPage}`; break;
+      case 'doramas': path = `/doramas?page=${currentPage}`; break;
+    }
     
-    // Add pagination buttons
-    renderPagination(page);
-  } else {
-    $content.innerHTML = `<div class="state-msg"><div class="icon">😕</div>No se encontraron resultados<br><small>${result.error ? 'Error de conexión. Intenta de nuevo.' : ''}</small></div>`;
+    const html = await fetchPage(path);
+    const doc = parseHTML(html);
+    const items = extractItems(doc, cat);
+    
+    const labels = { movies: 'Películas', series: 'Series', anime: 'Anime', doramas: 'Doramas' };
+    renderCards(items, labels[cat]);
+    
+  } catch (e) {
+    console.error(e);
+    $content.innerHTML = `<div class="state-msg"><div style="font-size:40px;margin-bottom:12px">⚠️</div>${esc(e.message)}<br><small>Verifica tu conexión a internet.</small></div>`;
   }
   
   showLoading(false);
 }
 
-function renderPagination(currentPage) {
-  const pagArea = document.getElementById('pag-area');
-  if (!pagArea) return;
-  
-  let html = '';
-  
-  // Previous button
-  if (currentPage > 1) {
-    html += `<button class="page-btn" data-page="${currentPage - 1}" tabindex="-1">← Anterior</button>`;
-  }
-  
-  // Page numbers
-  for (let i = Math.max(1, currentPage - 2); i <= Math.min(currentPage + 2, 5); i++) {
-    html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}" tabindex="-1">${i}</button>`;
-  }
-  
-  // Next button
-  html += `<button class="page-btn" data-page="${currentPage + 1}" tabindex="-1">Siguiente →</button>`;
-  
-  pagArea.innerHTML = html;
-}
-
-// Card click handler (Enter key)
-function activateFocused() {
-  const el = focusableEls[focusedIndex];
-  if (!el) return;
-  
-  // Nav buttons
-  if (el.classList.contains('nav-btn')) {
-    navigateToCategory(el.dataset.cat);
-    return;
-  }
-
-  // Page buttons
-  if (el.dataset.page !== undefined) {
-    const page = parseInt(el.dataset.page);
-    loadCategory(currentCat, page);
-    focusedIndex = 0;
-    return;
-  }
-
-  // Search results
-  if (el.classList.contains('search-result-item')) {
-    const idx = parseInt(el.dataset.index);
-    const item = searchResults[idx];
-    if (item) openDetail(item.slug, item.url);
-    $searchResultsWrap.classList.remove('show');
-    return;
-  }
-
-  // Server buttons
-  if (el.dataset.server !== undefined && !$playerOverlay.classList.contains('show')) {
-    const idx = parseInt(el.dataset.server);
-    const servers = getModalServers();
-    if (servers && servers[idx]) playServer(servers[idx].url);
-    return;
-  }
-
-  // Season buttons
-  if (el.classList.contains('season-btn')) {
-    document.querySelectorAll('.season-btn').forEach(b => b.classList.remove('active'));
-    el.classList.add('active');
-    // Load episodes for this season
-    loadSeason(parseInt(el.dataset.season));
-    return;
-  }
-
-  // Play movie button
-  if (el.id === 'play-movie-btn') {
-    const detail = getCurrentDetail();
-    if (detail && detail.servers) {
-      renderServerModal(detail.title, detail.servers);
-    }
-    return;
-  }
-
-  // Cards - open detail page
-  if (el.classList.contains('card')) {
-    const url = el.dataset.url;
-    const slug = parseSlug(url);
-    openDetail(slug, url);
-    return;
-  }
-
-  // Episode cards
-  if (el.classList.contains('episode-card')) {
-    const idx = parseInt(el.dataset.episode);
-    const detail = getCurrentDetail();
-    if (detail && detail.seasonEpisodes) {
-      const ep = detail.seasonEpisodes[0][idx];
-      if (ep && ep.url) {
-        playServer(ep.url);
-      } else {
-        // Open episode detail page to get servers
-        openDetail(ep.slug, ep.url || BASE + '/' + ep.slug);
-      }
-    }
-    return;
-  }
-
-  // Player close button
-  if (el.id === 'player-close' && $playerOverlay.classList.contains('show')) {
-    closePlayer();
-    return;
-  }
-
-  // Player back button
-  if (el.id === 'player-back') {
-    closePlayer();
-    return;
-  }
-}
-
-function getModalServers() {
-  const btns = $serverList.querySelectorAll('.server-btn');
-  return Array.from(btns).map(b => ({ name: b.textContent, url: b.dataset.url || '' }));
-}
-
-// Store current detail for episode access
-let currentDetailData = null;
-function getCurrentDetail() { return currentDetailData; }
-
-async function openDetail(slug, url) {
+async function openDetail(slug) {
   showLoading(true);
-  
-  // Scroll to top
   $main.scrollTop = 0;
   
-  const isMovie = slug.startsWith('pelicula/');
-  const detailType = isMovie ? 'movies' : 'series';
-  
-  // Fetch the detail page for player links
-  currentDetailData = await fetchDetailPage(slug);
+  try {
+    const url = '/' + slug;
+    const html = await fetchPage(url);
+    
+    // Check if it's a movie or series page by looking for season info
+    const isSeries = html.includes('temporada') || html.includes('season');
+    
+    currentDetailData = {
+      slug,
+      title: slug.split('/').pop().replace(/-/g, ' '),
+      servers: extractPlayerLinks(html)
+    };
+
+    if (isSeries && html.includes('Temporada')) {
+      renderSeriesDetail(currentDetailData);
+    } else {
+      // Movie - show server selection directly
+      renderServerModal(currentDetailData.title, currentDetailData.servers);
+    }
+    
+  } catch (e) {
+    console.error(e);
+    $content.innerHTML = `<div class="state-msg"><div style="font-size:40px;margin-bottom:12px">⚠️</div>No se pudo cargar el contenido.<br><small>${esc(e.message)}</small></div>`;
+  }
   
   showLoading(false);
+}
+
+function renderSeriesDetail(detail) {
+  let html = `<div class="section-header">${esc(detail.title)}</div>`;
   
-  if (currentDetailData) {
-    renderDetail(currentDetailData);
-    buildFocusableElements();
-    
-    // Set focused index to first playable element
-    const playBtns = $content.querySelectorAll('.server-btn, .card');
-    if (playBtns.length) focusedIndex = Math.min(focusedIndex, playBtns.length - 1);
+  // Extract seasons from page
+  const seasonBtns = [];
+  // Try to find season buttons in the HTML
+  const allText = detail._html || '';
+  
+  // Simple approach: show server selection for series too
+  html += `<div style="padding:16px 24px"><button class="server-btn" id="play-series-btn">▶ Reproducir</button></div>`;
+
+  if (detail.servers && detail.servers.length) {
+    $content.innerHTML = html;
+    buildFocusable();
   } else {
-    showError('No se pudo cargar el contenido. Intenta de nuevo.');
+    renderServerModal(detail.title, detail.servers);
   }
 }
 
-async function loadSeason(seasonIdx) {
-  // For now, just re-fetch and try to get episodes for this season
-  if (currentDetailData && currentDetailData.seasons) {
-    const detail = await fetchDetailPage(currentDetailData.slug);
-    if (detail) {
-      currentDetailData = detail;
-      renderDetail(detail);
-      buildFocusableElements();
-    }
+function renderServerModal(title, servers) {
+  if (!servers || !servers.length) {
+    // Try direct page as player
+    playDirect(BASE + '/' + currentDetailData.slug);
+    return;
   }
+  
+  $serverModalTitle.textContent = title;
+  $serverListEl.innerHTML = servers.map((s, i) => 
+    `<button class="server-btn" data-url="${esc(s.url)}">${esc(s.name)}</button>`
+  ).join('');
+  
+  $serverModal.classList.add('show');
 }
 
 function playServer(url) {
-  $playerIframe.src = url;
-  $playerTitle.textContent = 'Reproduciendo...';
-  $playerOverlay.classList.add('show');
-  focusedIndex = 0; // Reset focus for player controls
-  
-  // Rebuild focusable elements in player context
-  setTimeout(() => {
-    const closeBtn = document.getElementById('player-close');
-    const backBtn = document.getElementById('player-back');
-    if (closeBtn) closeBtn.classList.add('focused');
-  }, 300);
+  if (url.startsWith(BASE)) {
+    // Open in direct iframe overlay
+    playDirect(url);
+  } else {
+    // External URL - open in player overlay
+    $playerIframe.src = url;
+    $playerTitleEl.textContent = 'Reproduciendo...';
+    $playerOverlay.classList.add('show');
+    focusedIndex = 0;
+    
+    setTimeout(() => {
+      const closeBtn = document.getElementById('player-close');
+      if (closeBtn) closeBtn.classList.add('focused');
+    }, 200);
+  }
 }
 
-function closePlayer() {
-  $playerIframe.src = '';
-  $playerOverlay.classList.remove('show');
-  $serverModal.classList.remove('show');
+function playDirect(url) {
+  $directFrame.src = url;
+  $directFrame.style.display = 'block';
+  
+  // Add a back button overlay
+  const backOverlay = document.createElement('div');
+  backOverlay.id = 'frame-back-overlay';
+  backOverlay.style.cssText = 'position:fixed;top:72px;left:16px;z-index:55;cursor:pointer;padding:8px 14px;background:rgba(0,0,0,0.7);color:#fff;border-radius:6px;font-size:14px;font-family:inherit';
+  backOverlay.textContent = '← Volver';
+  backOverlay.onclick = closeDirectFrame;
+  document.body.appendChild(backOverlay);
+}
+
+function closeDirectFrame() {
+  $directFrame.src = '';
+  $directFrame.style.display = 'none';
+  const overlay = document.getElementById('frame-back-overlay');
+  if (overlay) overlay.remove();
   
   // Rebuild focus for content
-  if (focusableEls.length) applyFocus();
+  buildFocusable();
 }
 
-// ═══════════════════════════════════════════
-// Keyboard / Remote Control Handling
-// ═══════════════════════════════════════════
+// ═══════════════════════════════ SEARCH ═══════════════════════════════
+let searchTimeout;
+async function doSearch(query) {
+  if (!query || query.length < 3) {
+    $searchWrap.classList.remove('show');
+    return;
+  }
+
+  try {
+    const html = await fetchPage(`/buscar?q=${encodeURIComponent(query)}`);
+    const doc = parseHTML(html);
+    
+    searchResults = [];
+    const allLinks = Array.from(doc.querySelectorAll('a[href]'));
+    
+    for (const link of allLinks) {
+      const href = link.getAttribute('href') || '';
+      if (!href.startsWith('/pelicula/') && !href.startsWith('/serie/')) continue;
+      
+      let title = '';
+      const imgEl = link.querySelector('img');
+      if (imgEl && imgEl.alt) title = imgEl.alt.trim();
+      else {
+        const text = link.textContent.trim().replace(/\s+/g, ' ');
+        if (text.length > 2 && text.length < 100) title = text;
+      }
+
+      let poster = '';
+      if (imgEl && imgEl.src) poster = imgEl.src.replace(/\/w\d+\/?/, '/w500');
+
+      // Check if result is already in searchResults
+      const exists = searchResults.find(r => r.url === BASE + href);
+      if (!exists && title) {
+        searchResults.push({
+          slug: href.replace(/^\//, ''),
+          url: BASE + href,
+          title,
+          year: '?',
+          poster,
+          type: href.startsWith('/serie/') ? 'series' : 'movies'
+        });
+      }
+
+      if (searchResults.length >= 20) break; // limit results
+    }
+
+    renderSearchResults();
+    
+  } catch (e) {
+    console.error('Search error:', e);
+    searchResults = [];
+    $searchWrap.classList.remove('show');
+  }
+}
+
+// ═══════════════════════════════ KEYBOARD / REMOTE CONTROL ═══════════════════════════════
 document.addEventListener('keydown', (e) => {
   const key = e.key;
-  
-  // Player overlay active - handle player controls
-  if ($playerOverlay.classList.contains('show')) {
-    if (key === 'Escape' || key === 'Backspace') {
-      closePlayer();
+
+  // Direct frame mode - handle back
+  if ($directFrame.style.display === 'block') {
+    if (key === 'Escape' || key === 'Backspace' || key === 'Return') {
+      closeDirectFrame();
       e.preventDefault();
       return;
     }
+    if (key === 'ArrowRight') { focusNext(); e.preventDefault(); return; }
+    if (key === 'ArrowLeft') { focusPrev(); e.preventDefault(); return; }
+  }
+
+  // Player overlay active
+  if ($playerOverlay.classList.contains('show')) {
+    if (key === 'Escape' || key === 'Backspace') { closePlayer(); e.preventDefault(); return; }
     if (key === 'ArrowRight') { focusNext(); e.preventDefault(); return; }
     if (key === 'ArrowLeft') { focusPrev(); e.preventDefault(); return; }
     if (key === 'Enter' || key === 'OK') { activateFocused(); return; }
@@ -915,60 +669,45 @@ document.addEventListener('keydown', (e) => {
   }
 
   // Search results visible
-  if ($searchResultsWrap.classList.contains('show')) {
-    const srEls = $searchResultsWrap.querySelectorAll('.search-result-item');
+  if ($searchWrap.classList.contains('show')) {
+    const srEls = $searchWrap.querySelectorAll('.search-result-item');
     
     if (key === 'Escape') {
-      $searchResultsWrap.classList.remove('show');
+      $searchWrap.classList.remove('show');
       e.preventDefault();
       return;
     }
-    
+
     // Arrow keys navigate search results
     if (key === 'ArrowDown' || key === 'ArrowRight') {
       focusedIndex = Math.min(focusedIndex + 1, srEls.length - 1);
-      applyFocusOnSearchResults(srEls);
+      applyFocusSearch(srEls);
       e.preventDefault();
       return;
     }
-    
+
     if (key === 'ArrowUp' || key === 'ArrowLeft') {
-      // If at top of search results, go to nav buttons
       if (focusedIndex < srEls.length) focusedIndex = 0;
       else focusedIndex = Math.max(focusedIndex - 1, 0);
       
-      if (focusedIndex >= srEls.length) {
-        applyFocus(); // back to main content
-      } else {
-        applyFocusOnSearchResults(srEls);
-      }
+      if (focusedIndex >= srEls.length) applyFocus();
+      else applyFocusSearch(srEls);
       e.preventDefault();
       return;
     }
-    
-    if (key === 'Enter' || key === 'OK') {
-      activateFocused();
-      e.preventDefault();
-      return;
-    }
+
+    if (key === 'Enter' || key === 'OK') { activateFocused(); e.preventDefault(); return; }
   }
 
-  // Search input focused - let it handle its own keys first
+  // Search input focused
   if (document.activeElement === $searchInput) {
     if (key === 'Escape') {
-      $searchResultsWrap.classList.remove('show');
+      $searchWrap.classList.remove('show');
       $searchInput.blur();
       e.preventDefault();
       return;
     }
-    // Arrow down to select search result
-    if (key === 'ArrowDown' && searchResults.length > 0) {
-      focusedIndex = focusableEls.length; // position at first search result
-      applyFocusOnSearchResults($searchResultsWrap.querySelectorAll('.search-result-item'));
-      e.preventDefault();
-      return;
-    }
-    if (key === 'Enter') {
+    if (key === 'Enter' && searchResults.length > 0) {
       activateFocused();
       e.preventDefault();
       return;
@@ -978,32 +717,14 @@ document.addEventListener('keydown', (e) => {
 
   // Main content navigation
   switch(key) {
-    case 'ArrowRight':
-    case 'ArrowDown':
-      focusNext();
-      e.preventDefault();
-      break;
-      
-    case 'ArrowLeft':
-    case 'ArrowUp':
-      focusPrev();
-      e.preventDefault();
-      break;
-      
-    case 'Enter':
-    case 'OK':
-      activateFocused();
-      e.preventDefault();
-      break;
-      
-    case 'Escape':
-      closePlayer();
-      $searchResultsWrap.classList.remove('show');
-      break;
+    case 'ArrowRight': case 'ArrowDown': focusNext(); e.preventDefault(); break;
+    case 'ArrowLeft': case 'ArrowUp': focusPrev(); e.preventDefault(); break;
+    case 'Enter': case 'OK': activateFocused(); e.preventDefault(); break;
+    case 'Escape': closePlayer(); $searchWrap.classList.remove('show'); break;
   }
 });
 
-function applyFocusOnSearchResults(items) {
+function applyFocusSearch(items) {
   document.querySelectorAll('.search-result-item.focused').forEach(el => el.classList.remove('focused'));
   if (items[focusedIndex]) {
     items[focusedIndex].classList.add('focused');
@@ -1011,67 +732,116 @@ function applyFocusOnSearchResults(items) {
   }
 }
 
-// ═══════════════════════════════════════════
-// Search Input Handler
-// ═══════════════════════════════════════════
+// ═══════════════════════════════ EVENT HANDLERS ═══════════════════════════════
+function activateFocused() {
+  const el = focusableEls[focusedIndex];
+  if (!el) return;
+
+  // Nav buttons
+  if (el.classList.contains('nav-btn')) {
+    loadCategory(el.dataset.cat, 1);
+    focusedIndex = Math.min(focusedIndex, focusableEls.length > 0 ? focusableEls.length - 1 : 0);
+    return;
+  }
+
+  // Page buttons
+  if (el.dataset.page !== undefined) {
+    loadCategory(currentCat, parseInt(el.dataset.page));
+    focusedIndex = Math.min(focusedIndex, focusableEls.length > 0 ? focusableEls.length - 1 : 0);
+    return;
+  }
+
+  // Search results
+  if (el.classList.contains('search-result-item')) {
+    const idx = parseInt(el.dataset.index);
+    const item = searchResults[idx];
+    if (item) openDetail(item.slug);
+    $searchWrap.classList.remove('show');
+    return;
+  }
+
+  // Server buttons
+  if (el.classList.contains('server-btn') && !$playerOverlay.classList.contains('show')) {
+    const url = el.dataset.url;
+    if (url) playServer(url);
+    return;
+  }
+
+  // Play series button
+  if (el.id === 'play-series-btn' && currentDetailData && currentDetailData.servers) {
+    renderServerModal(currentDetailData.title, currentDetailData.servers);
+    return;
+  }
+
+  // Cards - open detail
+  if (el.classList.contains('card')) {
+    const url = el.dataset.url;
+    if (url) openDetail(url.replace(BASE + '/', ''));
+    return;
+  }
+
+  // Episode cards
+  if (el.classList.contains('episode-card')) {
+    const idx = parseInt(el.dataset.episode);
+    const detail = currentDetailData;
+    if (detail && detail.seasonEpisodes && detail.seasonEpisodes[0]) {
+      const ep = detail.seasonEpisodes[0][idx];
+      if (ep && ep.url) playServer(ep.url);
+      else openDetail(ep.slug, BASE + '/' + ep.slug);
+    }
+    return;
+  }
+
+  // Player close
+  if (el.id === 'player-close') { closePlayer(); return; }
+  if (el.id === 'player-back') { closePlayer(); return; }
+}
+
+function closePlayer() {
+  $playerIframe.src = '';
+  $playerOverlay.classList.remove('show');
+  buildFocusable();
+}
+
+// Nav click handlers
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => loadCategory(btn.dataset.cat, 1));
+});
+
+// Search input with debounce
 $searchInput.addEventListener('input', () => {
   clearTimeout(searchTimeout);
-  searchTimeout = setTimeout(() => doSearch($searchInput.value.trim()), 600);
+  searchTimeout = setTimeout(() => doSearch($searchInput.value.trim()), 700);
 });
 
 $searchInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
     e.preventDefault();
     const query = $searchInput.value.trim();
-    if (query.length >= 3) {
-      doSearch(query);
-      // Focus first search result or nav buttons
-      focusedIndex = Math.min(focusedIndex, focusableEls.length > 0 ? focusableEls.length - 1 : 0);
-    }
+    if (query.length >= 3) doSearch(query);
   }
 });
 
-// ═══════════════════════════════════════════
-// Utility Functions
-// ═══════════════════════════════════════════
-function showLoading(show) {
-  $loading.style.display = show ? 'block' : 'none';
-}
-
-function showError(msg) {
-  $content.innerHTML = `<div class="state-msg"><div class="icon">⚠️</div>${escapeHtml(msg)}<br><small style="margin-top:12px;display:block">Intenta de nuevo o verifica tu conexión.</small></div>`;
-}
-
-function escapeHtml(str) {
+// ═══════════════════════════════ UTILS ═══════════════════════════════
+function esc(str) {
   const div = document.createElement('div');
   div.textContent = str || '';
   return div.innerHTML;
 }
 
-// ═══════════════════════════════════════════
-// Initialize
-// ═══════════════════════════════════════════
+// ═══════════════════════════════ INIT ═══════════════════════════════
 async function init() {
   showLoading(true);
   
-  // Load first category by default
-  const result = await fetchCategory(currentCat, currentPage);
-  
-  if (result.items && result.items.length > 0) {
-    allItems = result.items;
-    renderCategory(allItems, currentCat);
-    renderPagination(1);
-    
-    // Set initial focus to first nav button
-    focusedIndex = 0;
-  } else {
-    showError('No se pudo conectar con el servidor. Verifica tu conexión a internet.');
+  try {
+    await loadCategory(currentCat, currentPage);
+  } catch (e) {
+    $content.innerHTML = `<div class="state-msg"><div style="font-size:40px;margin-bottom:12px">⚠️</div>No se pudo conectar con el servidor.<br><small>Verifica tu conexión a internet e intenta de nuevo.</small></div>`;
   }
   
   showLoading(false);
 }
 
-// Start the app
 init();
 </script>
 </body>
