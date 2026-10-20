@@ -134,19 +134,45 @@ const $serverListEl = document.getElementById('server-list');
 const $serverModalTitle = document.getElementById('server-modal-title');
 const $directFrame = document.getElementById('direct-frame');
 
-// ═══════ FETCH (DIRECT) ═══════
+// ═══════ FETCH (DIRECT → PROXY FALLBACK) ═══════
 async function fetchPage(path, retries = 2) {
+  // Try direct first
   for (let a = 0; a <= retries; a++) {
     try {
       const url = BASE + path + (path.includes('?') ? '&' : '?') + '_=' + Date.now();
-      const res = await fetch(url, { headers: { 'Accept-Language': 'es-419,es;q=0.9' } });
+      console.log('Direct fetch:', url);
+      const res = await fetch(url, { headers: { 'Accept-Language': 'es-419,es;q=0.9' }, signal: AbortSignal.timeout(12000) });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return await res.text();
+      const text = await res.text();
+      if (text.length > 5000) return text; // Valid content
+      throw new Error('Respuesta muy corta');
     } catch (e) {
-      if (a < retries) await sleep(1500 * (a + 1));
+      console.warn('Direct fetch attempt', a + 1, 'failed:', e.message);
+      if (a < retries) await sleep(2000 * (a + 1));
     }
   }
-  throw new Error('No se pudo cargar el contenido');
+
+  // Fallback: try CORS proxies in sequence
+  const proxyUrl = BASE + path;
+  
+  for (const proxy of [
+    u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+    u => `https://corsproxy.io/?${encodeURIComponent(u)}`
+  ]) {
+    try {
+      const url = proxy(proxyUrl);
+      console.log('Proxy fetch:', url.substring(0, 80));
+      const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const text = await res.text();
+      if (text.length > 5000) return text;
+    } catch (e) {
+      console.warn('Proxy failed:', e.message);
+    }
+  }
+
+  // Last resort: try the page itself as iframe source and parse via DOM
+  throw new Error('No se pudo cargar el contenido. Intenta de nuevo.');
 }
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
@@ -488,7 +514,7 @@ async function loadCategory(cat, page) {
     
   } catch (e) {
     console.error(e);
-    $content.innerHTML = `<div class="state-msg"><div style="font-size:40px;margin-bottom:12px">⚠️</div>${esc(e.message)}<br><small>Verifica tu conexión.</small></div>`;
+    $content.innerHTML = `<div class="state-msg"><div style="font-size:40px;margin-bottom:12px">⚠️</div>${esc(e.message)}<br><small>Intenta refrescar la página o verifica tu conexión.</small></div>`;
   }
   
   showLoading(false);
