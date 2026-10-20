@@ -1,0 +1,28 @@
+name: Deploy static site to gh-pages
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+      
+      - name: Deploy to gh-pages branch
+        run: |
+          git checkout --orphan gh-pages-temp
+          git reset --hard
+          git checkout master -- .
+          rm -f .gitignore
+          git add -A
+          git commit -m "Deploy $(git rev-parse --short HEAD)"
+          git push origin gh-pages-temp:gh-pages --force
